@@ -1,0 +1,38 @@
+<cu-custom bgColor="bg-gradual-blue">
+  <view slot="content">手写数字识别</view>
+</cu-custom>
+<view class=" cu-form-group bg-white radius shadow shadow-lg">
+  <view class="title">Tips:本程序只能识别0-9这十个数字哦~</view>
+    <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+			<view class="picker">
+				{{index?picker[index]:'kNN'}}
+			</view>
+		</picker>
+</view>
+<view class="wrapper">
+  <view class="handCenter">
+    <canvas class="handWriting" disable-scroll="true" bindtouchstart="uploadScaleStart" bindtouchmove="uploadScaleMove" bindtouchend="uploadScaleEnd" bindtap="mouseDown" canvas-id="handWriting">
+    </canvas>
+  </view>
+</view>
+<view class="cu-list grid col-4 no-border">
+  <view class="cu-item">
+    <button class="cu-btn margin-sm bg-blue shadow" bindtap="retDraw">重画</button>
+  </view>
+  <view class="cu-item">
+    <button class="cu-btn margin-sm bg-blue shadow" bindtap="saveCanvasAsImg">保存</button>
+  </view>
+  <view class="cu-item">
+    <button class="cu-btn margin-sm bg-blue shadow" bindtap="previewCanvasImg">预览</button>
+  </view>
+  <view class="cu-item">
+    <button class="cu-btn margin-sm bg-blue shadow" bindtap="uploadCanvasImg">识别</button>
+  </view>
+</view>
+<view wx:if="{{result!=null}}" class="margin-xl padding-xl bg-white radius shadow shadow-lg">
+  识别结果：{{result}}，耗时：{{time}}s，结果准确吗？
+  <view class='query' wx:if="{{fankui==0}}">
+    <button class="cu-btn line-green  text-green" bindtap="no">不准确</button>
+    <button class="cu-btn bg-green margin-left" bindtap="yes">准确</button>
+  </view>
+</view>
